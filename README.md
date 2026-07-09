@@ -4,7 +4,7 @@
 
 它不是单纯“转写文案”。它会按流程把原始内容拆成证据，再改写成可发布文案，并把文案拆成小红书 3:4 图片卡片。
 
-最终你会拿到：
+最终产物包括：
 
 - `text/publish.docx`：主文案 Word 文档，包含标题、封面文案、正文、标签。
 - `text/publish.txt`：正文纯文本备份，方便复制到小红书。
@@ -14,10 +14,10 @@
 
 ## 适合什么场景
 
-- 你看到一条小红书爆款视频，想拆解后写成自己的图文笔记。
-- 你已经有一篇长文，想转成小红书可发的图片组。
-- 你想把“文案”和“配图”分开交付，方便复制正文、单独上传图片。
-- 你想让 Codex 固定按证据链工作，不凭空编内容。
+- 从小红书爆款视频中拆解结构，并改写成原创图文笔记。
+- 将已有长文转成适合小红书发布的图片组。
+- 将“文案”和“配图”分开交付，方便复制正文、单独上传图片。
+- 让 Codex 固定按证据链工作，减少凭空编内容。
 
 不适合：
 
@@ -27,7 +27,7 @@
 
 ## 安装
 
-在朋友电脑的 Windows PowerShell 里运行：
+在需要安装该技能的 Windows 电脑上运行：
 
 ```powershell
 git clone https://github.com/ghy369832-hub/xhs-postflow.git "$env:USERPROFILE\.codex\skills\xhs-postflow"
@@ -77,7 +77,7 @@ powershell -ExecutionPolicy Bypass -File .\install.ps1
 https://www.xiaohongshu.com/...
 ```
 
-如果你已经有文章文件，可以这样用：
+如果输入源是已有文章文件，可以这样用：
 
 ```text
 [$xhs-postflow] C:\path\to\article.txt
@@ -154,7 +154,7 @@ outputs/xhs-postflow/<标题或主题>/
 
 ## 注意事项
 
-- 这个技能不会自动发布小红书，也不会登录你的账号。
+- 这个技能不会自动发布小红书，也不会登录任何账号。
 - 它不会保证“必爆”，只会输出“基于对标拆解的可发布草稿”。
 - 健康、医疗、法律、金融内容需要人工复核，不能直接当专业建议。
 - Markdown 只作为中间文件，最终文案默认是 Word 文档。
@@ -162,7 +162,7 @@ outputs/xhs-postflow/<标题或主题>/
 
 ## 更新
 
-如果朋友电脑上已经安装过，可以进入技能目录后更新：
+如果已经通过 `git clone` 安装过，可以进入技能目录后更新：
 
 ```powershell
 cd "$env:USERPROFILE\.codex\skills\xhs-postflow"
