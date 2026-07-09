@@ -1,55 +1,70 @@
 # xhs-postflow
 
-Evidence-first Codex skill for turning a Xiaohongshu or short-video link into a publishable Xiaohongshu draft.
+Codex skill for turning a Xiaohongshu/Rednote video or note link into a local publishing package:
 
-It is an orchestration skill:
+- Word copy document: `text/publish.docx`
+- Optional plain text sidecars: `publish.txt`, `titles.txt`, `cover-copy.txt`, `tags.txt`
+- Xiaohongshu image cards: `images/*.png`
 
-1. Run `yyl-benchmark-breakdown` first to extract evidence: metadata, transcript, visual frames, reusable formula, and positioning.
-2. Build an intermediate evidence pack.
-3. Apply Xiaohongshu copy gates to generate titles, cover copy, body, tags, and publishing notes.
-
-It must not claim guaranteed virality. The final output is a `基于对标拆解的可发布草稿`, not a guaranteed hit.
+This is an orchestration skill. It coordinates evidence extraction, copy rewriting, and image-card generation.
 
 ## Install
 
-Clone this repo into your Codex skills directory:
+Fastest install on Windows PowerShell:
 
 ```powershell
 git clone https://github.com/ghy369832-hub/xhs-postflow.git "$env:USERPROFILE\.codex\skills\xhs-postflow"
 ```
 
-Restart Codex or open a new Codex chat so the skill list refreshes.
+Alternative install:
 
-## Dependency
+```powershell
+git clone https://github.com/ghy369832-hub/xhs-postflow.git
+cd xhs-postflow
+powershell -ExecutionPolicy Bypass -File .\install.ps1
+```
 
-For full video evidence extraction, also install/use `yyl-benchmark-breakdown`. `xhs-postflow` is the orchestration layer; it expects the benchmark skill to download, transcribe, and inspect visual evidence before writing copy.
+Then restart Codex or open a new Codex chat so the skill list refreshes.
+
+## Dependencies
+
+Install these skills on the target computer too:
+
+- `yyl-benchmark-breakdown`
+- `xhs-article-to-images`
+
+For video extraction and transcription, the target computer also needs the same local media tooling used by those skills, such as FFmpeg and the configured transcription toolchain.
 
 ## Usage
 
-Best prompt:
+In Codex:
 
 ```text
-/xhs-postflow https://www.xiaohongshu.com/explore/xxxx
+[$xhs-postflow] <xiaohongshu link>
 ```
 
-More explicit prompt:
+Or:
 
 ```text
-/xhs-postflow https://www.xiaohongshu.com/explore/xxxx
-先拆证据包，再生成小红书发布草稿
+/xhs-postflow <xiaohongshu link>
 ```
 
-Stable Codex skill invocation:
+The final output is written under the current workspace:
 
 ```text
-用 $xhs-postflow 拆这个视频，先出证据包，再写发布草稿：
-https://www.xiaohongshu.com/explore/xxxx
+outputs/xhs-postflow/<slug>/
+├── text/
+│   ├── publish.docx
+│   ├── publish.txt
+│   ├── titles.txt
+│   ├── cover-copy.txt
+│   └── tags.txt
+├── images/
+└── work/
 ```
-
-If you only type `/xhs-postflow` without a link, Codex will need to ask for the video link, transcript, screenshots, or note text.
 
 ## Notes
 
-- Slash commands may work as plain-text trigger phrases if the Codex client does not provide a custom slash-command menu.
-- For health, medical, legal, or financial topics, the skill uses stricter safety wording and avoids absolute claims.
-- Downloaded media is temporary and should be cleaned after the evidence report and draft are saved.
+- The skill does not auto-publish or log in to Xiaohongshu.
+- Health, legal, financial, and other high-stakes content still needs domain review before posting.
+- Markdown is only used as an intermediate working format; Word is the primary text deliverable.

@@ -12,6 +12,10 @@ Thumbs.db
 *.png
 *.webp
 *.heic
+__pycache__/
+*.pyc
+node_modules/
 work/
+outputs/
 staging/
 downloads/
