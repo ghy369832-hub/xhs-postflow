@@ -1,0 +1,6 @@
+interface:
+  display_name: "小红书视频转文案工作流"
+  short_description: "先拆解视频证据，再生成小红书可发布草稿"
+  default_prompt: "Use $xhs-postflow, or type /xhs-postflow, to turn this Xiaohongshu or short-video link into an evidence-based publishable draft."
+policy:
+  allow_implicit_invocation: true
